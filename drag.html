@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{background: red;width: 100px;height: 100px;position: absolute;top: 0;left: 10px;}
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    box.onmousedown = function (e1) {
+        var ev1 = e1 || event;
+        var l = ev1.clientX - box.offsetLeft;
+        var t = ev1.clientY - box.offsetTop;
+        document.onmousemove = function (e) {
+            var ev = e || event;
+            var newTop =  ev.clientY - t;
+            var newLeft = ev.clientX - l;
+            var maxtop = innerHeight - box.offsetHeight;
+            var maxLeft = innerWidth - box.offsetWidth;
+            if(newTop < 0){
+                newTop = 0;
+            }
+            if(newLeft <= 0){
+                newLeft = 0;
+            }
+            if(newTop > maxtop){
+                newTop = maxtop;
+            }
+            if(newLeft > maxLeft){
+                newLeft = maxLeft;
+            }
+            box.style.top = newTop + 'px';
+            box.style.left = newLeft  + 'px';
+        };
+        document.onmouseup =function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        };
+        return false;
+    }
+
+
+
+
+</script>
+</body>
+</html>
